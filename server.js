@@ -10,11 +10,12 @@ app.get('/', (req, res) => {
 
 app.get('/api',async (req, res)=>{
     try{
-        const resquest = await fetch ('www.themealdb.com/api/json/v1/1/random.php');
-        if (!res.ok) {
+        const resquest = await fetch ('https://www.themealdb.com/api/json/v1/1/random.php');
+        if (!resquest.ok) {
             throw new Error('Network response was not ok');
         }
-        res.json(resquest);
+        const data = await resquest.json();
+        res.json(data);
     }
     catch(err){
         console.error(err);
